@@ -116,6 +116,24 @@ Subscriber Node
 The subscriber node listens to the topic /project_1_example_topic. For each message received, it appends the counter value to a "Hello World" string and prints the result to the console.
 The subscriber runs continuously until manually stopped by the user.
 
+## Testing
+This package uses Google Testing (GTest) to test both the publisher and the subscriber. The tests 
+for the publisher conduct three different checks, which include:
+- TEST 1: Verify publisher node is created properly
+- TEST 2: Verify message counter increments correctly
+- TEST 3: Verify published message content format
+
+The subscriber also uses GTest to conduct one test:
+- TEST 1: Verify publisher node is created properly
+- TEST 2: Verify that the subscriber displays the message content correctly
+
+These tests ensure the publisher and subscriber function as expected.
+
+## Launch Files 
+The launch file setup is designed to demonstrate that the system works correctly. It runs both the 
+publisher and subscriber for 10 seconds, then shuts them down and executes the tests. The publisher 
+tests are run first, followed by the subscriber tests.
+
 
 ## Topics & Message Types
 
