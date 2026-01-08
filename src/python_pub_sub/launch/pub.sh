@@ -8,8 +8,14 @@ fi
 
 cleanup() {
     echo "Stopping ROS2 nodes..."
-    pkill -f "project_1_publisher"
-    pkill -f "project_1_subscriber"
+
+    if [ -n "$PUB_PID" ]; then
+        kill $PUB_PID 2>/dev/null
+    fi
+
+    if [ -n "$SUB_PID" ]; then
+        kill $SUB_PID 2>/dev/null
+    fi
 
     echo "Restarting ROS2 daemon..."
     ros2 daemon stop
@@ -17,10 +23,12 @@ cleanup() {
     ros2 daemon start
 }
 
-trap cleanup SIGINT
+# CHANGED: ensure cleanup runs on normal exit as well
+trap cleanup EXIT SIGINT
 
 echo "Launching publisher in background..."
 ros2 run python_pub_sub project_1_publisher >/dev/null 2>&1 &
+PUB_PID=$!
 
 echo "Launching subscriber in foreground..."
 ros2 run python_pub_sub project_1_subscriber &
@@ -47,5 +55,3 @@ pytest src/python_pub_sub/test/pytest_sub.py -q
 echo "-----------------------------------"
 echo "All tests finished."
 echo "-----------------------------------"
-
-cleanup

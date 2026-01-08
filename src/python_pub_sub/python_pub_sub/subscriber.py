@@ -18,7 +18,6 @@ Date:
     6 Novermber 2025
 """
 
-from os import name
 import rclpy
 from rclpy.node import Node
 
@@ -27,6 +26,8 @@ from std_msgs.msg import String
 class MinimalSubscriber(Node):
     def __init__(self):
         super().__init__('minimal_py_subscriber')
+        
+        self.last_msg = None  
 
         self.subscriber_1 = self.create_subscription(
             String,
@@ -35,6 +36,7 @@ class MinimalSubscriber(Node):
             10)
         
     def listener_callback(self,msg):
+        self.last_msg = msg.data
         self.get_logger().info(f'I heard: "{msg.data}"')
 
 def main (args=None):
