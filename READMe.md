@@ -3,6 +3,9 @@
 ## Freelancing
 This repository is part of my robotics portfolio. I’m open to freelance, contract, and collaborative work involving ROS 2 and robotics software development.
 
+## Video demonstrating a breakdown and how the minimal python pub and sub works. The link is below:
+https://github.com/user-attachments/assets/07d7a02b-153c-4537-b455-c484b0b18953
+
 ## Overview
 This repository contains a minimal ROS2 Python project 
 demonstrating the simplest **publisher and subscriber**. The 
